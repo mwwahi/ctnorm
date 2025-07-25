@@ -15,6 +15,12 @@ def _check_transpose(vol):
     elif vol.shape[2] < vol.shape[0] and vol.shape[2] < vol.shape[1]:
         # Case: X, Y, Z
         vol = vol.transpose((2, 0, 1))
+    elif vol.shape[0] == vol.shape[1]:
+        #case: X, Y, Z
+        vol = vol.transpose((2, 0, 1))
+    elif vol.shape[1] == vol.shape[2]:
+        #case: Z, X, Y (already correct)
+        pass
     else:
         raise ValueError(f"Unexpected data shape: {vol.shape}. Unable to determine the correct transpose.")
     return vol
